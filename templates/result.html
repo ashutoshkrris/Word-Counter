@@ -1,0 +1,129 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Counter</title>
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+    <style>
+      .masthead {
+        height: 100vh;
+        min-height: 500px;
+        background-image: url("https://source.unsplash.com/BtbjCFUvBXs/1920x1080");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      .pricetag {
+        white-space:nowrap;
+        position:relative;
+        margin:0 5px 0 10px;
+        displaY:inline-block;
+        height:25px;
+        border-radius: 0 5px 5px 0;
+        padding: 0 25px 0 15px;
+        background:#E8EDF0;
+        border: 0 solid #C7D2D4;
+        border-top-width:1px;
+        border-bottom-width:1px;
+        color:#999;
+        line-height:23px;
+      }
+      .pricetag:after {
+        position:absolute;
+        right:0;
+        margin:1px 7px;
+        font-weight:bold;
+        font-size:19px;
+        content:"\00D7";
+      }
+      .pricetag:before {
+        position:absolute;
+        content:"\25CF";
+        color:white;
+        text-shadow: 0 0 1px #333;
+        font-size:11px;
+        line-height:0px;
+        text-indent:12px;
+        left:-15px;
+        width: 1px;
+        height:0px;
+        border-right:14px solid #E8EDF0;
+        border-top:  13px solid transparent;
+        border-bottom:  13px solid transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}">Word Counter</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'index' %}"
+                >Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'frequency' %}">Counter</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://ashutoshkrris.herokuapp.com"
+                >Developer</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Full Page Image Header with Vertically Centered Content -->
+    <!-- Page Content -->
+    <section class="py-5">
+      <div class="container pt-5">
+        <h2 class="font-weight-light text-center"><b>10 Most Frequently Used Words</b></h2>
+        <br>
+        <p class="text-center">
+            Site Link : <a href="{{site_name}}">{{site_name}}</a>
+            <br> <br>
+            <span class="pricetag">{{where}}</span>
+            <br>
+            <table class="table table-striped text-center" >
+                <thead>
+                  <tr>
+                    <th scope="col">Word</th>
+                    <th scope="col">Count</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for word in result %}
+                  <tr>
+                    <td>{{word.0}}</td>
+                    <td>{{word.1}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+        </p>
+      </div>
+    </section>
+    <script src="{% static 'assets/js/jquery.slim.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+  </body>
+</html>
